@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>구글 검색 연산자 사용법 정리</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f5f5f5;
+      color: #222;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 40px auto;
+      background: #ffffff;
+      padding: 30px 32px 40px;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    }
+
+    h1 {
+      margin-top: 0;
+      margin-bottom: 8px;
+      font-size: 28px;
+    }
+
+    p.description {
+      margin-top: 0;
+      margin-bottom: 24px;
+      font-size: 14px;
+      color: #666;
+    }
+
+    h2 {
+      margin-top: 32px;
+      margin-bottom: 10px;
+      font-size: 20px;
+      border-left: 4px solid #4285f4;
+      padding-left: 8px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    th, td {
+      border: 1px solid #eee;
+      padding: 8px 10px;
+      vertical-align: top;
+    }
+
+    th {
+      background: #fafafa;
+      font-weight: 600;
+      text-align: left;
+    }
+
+    tr:nth-child(even) td {
+      background: #fcfcfc;
+    }
+
+    code {
+      font-family: "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      background: #f3f3f3;
+      padding: 2px 4px;
+      border-radius: 4px;
+      font-size: 13px;
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 11px;
+      padding: 2px 6px;
+      border-radius: 999px;
+      background: #eef3ff;
+      color: #335;
+      margin-left: 4px;
+    }
+
+    .footer-tip {
+      margin-top: 26px;
+      font-size: 13px;
+      color: #666;
+      background: #f9fbff;
+      border-left: 3px solid #4285f4;
+      padding: 10px 12px;
+      border-radius: 4px;
+    }
+
+    @media (max-width: 720px) {
+      .container {
+        margin: 20px;
+        padding: 20px;
+      }
+
+      table {
+        font-size: 13px;
+      }
+
+      h1 {
+        font-size: 22px;
+      }
+
+      h2 {
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>구글 검색 연산자 사용법 정리</h1>
+    <p class="description">
+      아래 표는 구글에서 자주 사용하는 검색 연산자들을 정리한 것입니다.<br>
+      <strong>검색어 + 연산자</strong>를 조합해서 쓰면 훨씬 정확한 검색이 가능합니다.
+    </p>
+
+    <!-- 1. 기본 필터 -->
+    <h2>1. 기본 필터 연산자 <span class="tag">기본</span></h2>
+    <table>
+      <tr>
+        <th style="width: 12%;">분류</th>
+        <th style="width: 14%;">연산자</th>
+        <th style="width: 30%;">사용 예시</th>
+        <th>설명</th>
+      </tr>
+      <tr>
+        <td><strong>기본 필터</strong></td>
+        <td><code>site:</code></td>
+        <td><code>site:naver.com 검색어</code></td>
+        <td>특정 사이트 내에서만 검색.</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><code>intitle:</code></td>
+        <td><code>intitle:뉴스</code></td>
+        <td>제목에 특정 단어가 포함된 페이지 검색.</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><code>allintitle:</code></td>
+        <td><code>allintitle:서울 부동산</code></td>
+        <td>제목 전체에 지정한 단어들이 모두 포함된 페이지.</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><code>inurl:</code></td>
+        <td><code>inurl:login</code></td>
+        <td>URL에 특정 단어가 포함된 페이지 검색.</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><code>allinurl:</code></td>
+        <td><code>allinurl:shop product</code></td>
+        <td>URL 내에 여러 단어가 모두 포함된 페이지.</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><code>filetype:</code></td>
+        <td><code>filetype:pdf 보고서</code></td>
+        <td>특정 파일 형식만 검색 (예: pdf, doc, xls 등).</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><code>define:</code></td>
+        <td><code>define:블록체인</code></td>
+        <td>단어 정의나 설명을 검색.</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><code>related:</code></td>
+        <td><code>related:google.com</code></td>
+        <td>비슷한 사이트를 찾음.</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><code>cache:</code></td>
+        <td><code>cache:example.com</code></td>
+        <td>사이트의 캐시(저장된 버전) 보기.</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><code>link:</code></td>
+        <td><code>link:example.com</code></td>
+        <td>특정 사이트로 링크된 페이지 찾기.</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><code>info:</code></td>
+        <td><code>info:example.com</code></td>
+        <td>사이트 정보 보기.</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><code>movie:</code></td>
+        <td><code>movie:인셉션</code></td>
+        <td>영화 관련 정보 검색.</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><code>map</code></td>
+        <td><code>카페 map</code></td>
+        <td>지도 결과를 중심으로 검색.</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><code>weather</code></td>
+        <td><code>weather 서울</code></td>
+        <td>날씨 정보 표시.</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><code>stocks</code></td>
+        <td><code>stocks AAPL</code></td>
+        <td>주식 시세 검색.</td>
+      </tr>
+    </table>
+
+    <!-- 2. 고급 조합 / 논리 -->
+    <h2>2. 고급 조합 / 논리 검색 <span class="tag">고급</span></h2>
+    <table>
+      <tr>
+        <th style="width: 12%;">분류</th>
+        <th style="width: 14%;">연산자</th>
+        <th style="width: 30%;">사용 예시</th>
+        <th>설명</th>
+      </tr>
+      <tr>
+        <td><strong>고급 조합 / 논리 검색</strong></td>
+        <td><code>AND</code></td>
+        <td><code>경제 AND 정책</code></td>
+        <td>두 단어가 모두 포함된 결과.</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><code>OR</code></td>
+        <td><code>고양이 OR 강아지</code></td>
+        <td>두 단어 중 하나라도 포함된 결과.</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><code>-</code></td>
+        <td><code>아이폰 -케이스</code></td>
+        <td>특정 단어 제외.</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><code>+</code></td>
+        <td><code>+정확검색</code></td>
+        <td>특정 단어 반드시 포함 (요즘은 자동으로 적용되는 경우가 많음).</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><code>" "</code></td>
+        <td><code>"정확히 일치하는 문장"</code></td>
+        <td>따옴표 안 문장이 정확히 일치하는 결과만 표시.</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><code>*</code></td>
+        <td><code>서울 * 맛집</code></td>
+        <td><code>*</code>을 와일드카드로 사용 (아무 단어나 대체 가능).</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><code>AROUND(n)</code></td>
+        <td><code>python AROUND(3) code</code></td>
+        <td>두 단어가 가까이 있는 결과 (숫자는 단어 간 거리).</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><code>..</code></td>
+        <td><code>camera $100..$300</code></td>
+        <td>가격이나 숫자 범위 검색.</td>
+      </tr>
+    </table>
+
+    <!-- 3. 날짜 / 위치 / 출처 -->
+    <h2>3. 날짜 / 위치 / 출처 <span class="tag">필터</span></h2>
+    <table>
+      <tr>
+        <th style="width: 12%;">분류</th>
+        <th style="width: 14%;">연산자</th>
+        <th style="width: 30%;">사용 예시</th>
+        <th>설명</th>
+      </tr>
+      <tr>
+        <td><strong>날짜 / 위치 / 출처</strong></td>
+        <td><code>before:</code></td>
+        <td><code>삼성 before:2024-01-01</code></td>
+        <td>특정 날짜 이전의 결과.</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><code>after:</code></td>
+        <td><code>삼성 after:2024-06-01</code></td>
+        <td>특정 날짜 이후의 결과.</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><code>source:</code></td>
+        <td><code>source:BBC</code></td>
+        <td>특정 뉴스 출처만 검색.</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><code>location:</code></td>
+        <td><code>location:seoul</code></td>
+        <td>특정 지역의 결과만 표시.</td>
+      </tr>
+    </table>
+
+    <div class="footer-tip">
+      💡 <strong>예시 조합</strong><br>
+      <code>중고 사기 고소 방법 site:law.go.kr filetype:pdf after:2023-01-01</code><br>
+      → 법령 사이트에서, PDF 문서 중, 2023년 이후 자료만 찾아보기
+    </div>
+  </div>
+</body>
+</html>

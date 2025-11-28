@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>나만의 구글링 페이지</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f5f5f5;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    /* 🔹 좌측 상단의 '사용법' 버튼 (크고 눈에 띄게) */
+    .help-link {
+      position: absolute;
+      top: 20px;
+      left: 25px;
+    }
+
+    .help-link a {
+      display: inline-block;
+      color: #fff;
+      text-decoration: none;
+      background: #000; /* 검은색 박스 */
+      padding: 12px 22px; /* 크기 확장 */
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+      transition: all 0.25s ease;
+    }
+
+    .help-link a:hover {
+      background: #1a73e8; /* 마우스 올리면 파란색으로 */
+      color: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(26, 115, 232, 0.4);
+    }
+
+    .container {
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      font-size: 28px;
+      color: #333;
+    }
+
+    form {
+      display: inline-flex;
+      align-items: stretch;
+      gap: 8px;
+    }
+
+    input[type="text"] {
+      width: 320px;
+      padding: 10px 14px;
+      font-size: 16px;
+      border-radius: 999px;
+      border: 1px solid #ccc;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    input[type="text"]:focus {
+      border-color: #4285f4;
+      box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.2);
+    }
+
+    button {
+      padding: 10px 18px;
+      font-size: 16px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      background: #4285f4;
+      color: white;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    .keyword-section {
+      text-align: left;
+      width: 500px;
+      margin: 20px auto 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .small-btn {
+      background: #eee;
+      border: 1px solid #ccc;
+      color: #333;
+      font-size: 14px;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .small-btn:hover {
+      background: #ddd;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ✅ 좌측 상단 강조된 '사용법' 버튼 -->
+  <div class="help-link">
+    <a href="google1.html" target="_blank">사용법</a>
+  </div>
+
+  <div class="container">
+    <h1>구글링하자</h1>
+
+    <!-- ✅ 검색 시 새창으로 열리게 설정 -->
+    <form action="https://www.google.com/search" method="GET" target="_blank">
+      <input type="text" id="searchInput" name="q" placeholder="검색어를 입력하세요" autofocus />
+      <button type="submit">검색</button>
+    </form>
+
+    <div class="keyword-section">
+      <!-- 기본 -->
+      <button class="small-btn" data-keyword="site:">site:</button>
+      <button class="small-btn" data-keyword="intitle:">intitle:</button>
+      <button class="small-btn" data-keyword="allintitle:">allintitle:</button>
+      <button class="small-btn" data-keyword="inurl:">inurl:</button>
+      <button class="small-btn" data-keyword="allinurl:">allinurl:</button>
+      <button class="small-btn" data-keyword="filetype:">filetype:</button>
+      <button class="small-btn" data-keyword="define:">define:</button>
+      <button class="small-btn" data-keyword="related:">related:</button>
+      <button class="small-btn" data-keyword="cache:">cache:</button>
+      <button class="small-btn" data-keyword="link:">link:</button>
+
+      <!-- 고급 검색 조합 -->
+      <button class="small-btn" data-keyword="OR">OR</button>
+      <button class="small-btn" data-keyword="AND">AND</button>
+      <button class="small-btn" data-keyword="*">*</button>
+      <button class="small-btn" data-keyword="..">..</button>
+      <button class="small-btn" data-keyword="-">-</button>
+      <button class="small-btn" data-keyword='"'>"</button>
+      <button class="small-btn" data-keyword="+">+</button>
+      <button class="small-btn" data-keyword="AROUND()">AROUND()</button>
+
+      <!-- 검색 범위 관련 -->
+      <button class="small-btn" data-keyword="before:">before:</button>
+      <button class="small-btn" data-keyword="after:">after:</button>
+      <button class="small-btn" data-keyword="source:">source:</button>
+      <button class="small-btn" data-keyword="location:">location:</button>
+
+      <!-- 뉴스/쇼핑/기타 -->
+      <button class="small-btn" data-keyword="weather">weather</button>
+      <button class="small-btn" data-keyword="stocks">stocks</button>
+      <button class="small-btn" data-keyword="map">map</button>
+      <button class="small-btn" data-keyword="movie:">movie:</button>
+      <button class="small-btn" data-keyword="info:">info:</button>
+    </div>
+  </div>
+
+  <script>
+    const input = document.getElementById("searchInput");
+    const buttons = document.querySelectorAll(".small-btn");
+
+    buttons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const keyword = btn.dataset.keyword;
+
+        if (input.value && !input.value.endsWith(" ")) {
+          input.value += " ";
+        }
+
+        input.value += keyword;
+        input.focus();
+      });
+    });
+  </script>
+</body>
+</html>
