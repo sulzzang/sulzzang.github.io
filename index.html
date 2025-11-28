@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <title>나만의 구글링 페이지</title>
+  <!-- ✅ 모바일 반응형 필수 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     * {
       box-sizing: border-box;
@@ -23,15 +25,16 @@
     .help-link {
       position: absolute;
       top: 20px;
-      left: 25px;
+      left: 16px;
+      z-index: 10;
     }
 
     .help-link a {
       display: inline-block;
       color: #fff;
       text-decoration: none;
-      background: #000; /* 검은색 박스 */
-      padding: 12px 22px; /* 크기 확장 */
+      background: #000;
+      padding: 12px 22px;
       border-radius: 10px;
       font-size: 16px;
       font-weight: 600;
@@ -40,7 +43,7 @@
     }
 
     .help-link a:hover {
-      background: #1a73e8; /* 마우스 올리면 파란색으로 */
+      background: #1a73e8;
       color: #fff;
       transform: translateY(-2px);
       box-shadow: 0 6px 14px rgba(26, 115, 232, 0.4);
@@ -48,6 +51,9 @@
 
     .container {
       text-align: center;
+      width: 100%;
+      max-width: 640px;
+      padding: 20px;
     }
 
     h1 {
@@ -85,6 +91,7 @@
       cursor: pointer;
       background: #4285f4;
       color: white;
+      white-space: nowrap;
     }
 
     button:hover {
@@ -93,7 +100,8 @@
 
     .keyword-section {
       text-align: left;
-      width: 500px;
+      width: 100%;
+      max-width: 500px;
       margin: 20px auto 0 auto;
       display: flex;
       flex-wrap: wrap;
@@ -113,6 +121,66 @@
 
     .small-btn:hover {
       background: #ddd;
+    }
+
+    /* 📱 모바일(작은 화면) 전용 스타일 */
+    @media (max-width: 600px) {
+      body {
+        align-items: flex-start;
+        justify-content: center;
+        padding-top: 80px;
+        height: auto;
+        min-height: 100vh;
+      }
+
+      .help-link a {
+        font-size: 14px;
+        padding: 10px 18px;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      .container {
+        padding: 10px 16px 30px;
+      }
+
+      h1 {
+        font-size: 22px;
+        margin-bottom: 16px;
+      }
+
+      /* 검색창 + 버튼 세로 정렬 */
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        width: 100%;
+        max-width: 500px;
+        margin: 0 auto;
+      }
+
+      input[type="text"] {
+        width: 100%;
+        font-size: 16px;
+      }
+
+      button {
+        width: 100%;
+        font-size: 15px;
+      }
+
+      .keyword-section {
+        max-width: 100%;
+        gap: 6px;
+        justify-content: flex-start;
+      }
+
+      /* 🔹 모바일에서 버튼을 한 줄에 4개 정도씩 나오게 */
+      .small-btn {
+        font-size: 11px;
+        padding: 6px 4px;
+        flex: 0 0 calc(25% - 6px); /* 4개 / 줄 기준 */
+        text-align: center;
+      }
     }
   </style>
 </head>
