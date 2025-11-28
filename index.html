@@ -3,48 +3,52 @@
 <head>
   <meta charset="UTF-8" />
   <title>구글링하자</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6490896369255241"
      crossorigin="anonymous"></script>
   <meta name="google-adsense-account" content="ca-pub-6490896369255241">
-  <!-- ✅ 모바일 반응형 필수 -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ✅ 폰트 추가 (Noto Sans KR) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: #f5f5f5;
-      height: 100vh;
+      font-family: "Noto Sans KR", -apple-system, BlinkMacSystemFont, system-ui, "Segoe UI", sans-serif;
+      background: #000; /* 🔹 배경을 검은색으로 변경 */
+      color: #222;
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding-top: 70px;
       position: relative;
     }
 
-    /* 🔹 좌측 상단의 '사용법' 버튼 (크고 눈에 띄게) */
+    /* 좌측 상단 '사용법' 버튼 */
     .help-link {
-      position: absolute;
-      top: 20px;
+      position: fixed;
+      top: 16px;
       left: 16px;
-      z-index: 10;
+      z-index: 100;
     }
-
     .help-link a {
       display: inline-block;
-      color: #fff;
+      color: #000;
       text-decoration: none;
-      background: #000;
+      background: #fff;
       padding: 12px 22px;
       border-radius: 10px;
       font-size: 16px;
       font-weight: 600;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
       transition: all 0.25s ease;
+      border: 1px solid #fff3; /* 살짝 보이게 */
     }
-
     .help-link a:hover {
       background: #1a73e8;
       color: #fff;
@@ -52,211 +56,545 @@
       box-shadow: 0 6px 14px rgba(26, 115, 232, 0.4);
     }
 
-    .container {
-      text-align: center;
+    .page-wrap {
       width: 100%;
-      max-width: 640px;
-      padding: 20px;
+      max-width: 900px;
+      padding: 0 12px 40px;
     }
 
-    h1 {
+    .card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+      padding: 24px 20px 26px;
       margin-bottom: 20px;
-      font-size: 28px;
+    }
+
+    .card-title {
+      margin: 0 0 6px;
+      font-size: 24px;
+      text-align: center; /* 🔹 h1 가운데 정렬 */
+    }
+
+    .card-sub {
+      margin: 0 0 18px;
+      font-size: 13px;
+      color: #666;
+      text-align: center;
+    }
+
+    .section-title {
+      margin: 18px 0 6px;
+      font-size: 15px;
+      font-weight: 600;
       color: #333;
     }
 
-    form {
-      display: inline-flex;
-      align-items: stretch;
-      gap: 8px;
+    .row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
     }
-
-    input[type="text"] {
-      width: 320px;
-      padding: 10px 14px;
-      font-size: 16px;
-      border-radius: 999px;
+    .row label {
+      width: 160px;
+      font-size: 14px;
+      color: #444;
+    }
+    .row input {
+      flex: 1;
+      padding: 8px 10px;
+      font-size: 14px;
+      border-radius: 8px;
       border: 1px solid #ccc;
       outline: none;
-      transition: border-color 0.2s, box-shadow 0.2s;
+      min-width: 0;
     }
-
-    input[type="text"]:focus {
+    .row input:focus {
       border-color: #4285f4;
-      box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.2);
+      box-shadow: 0 0 0 2px rgba(66,133,244,0.2);
     }
 
-    button {
-      padding: 10px 18px;
-      font-size: 16px;
-      border-radius: 999px;
+    .hint {
+      font-size: 11px;
+      color: #888;
+      margin-left: 160px;
+      margin-top: -6px;
+      margin-bottom: 6px;
+    }
+
+    .buttons {
+      margin-top: 16px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .buttons button {
+      padding: 9px 16px;
+      font-size: 14px;
+      border-radius: 8px; /* 🔹 살짝 둥근 직사각형 */
       border: none;
       cursor: pointer;
       background: #4285f4;
       color: white;
-      white-space: nowrap;
+      min-width: 150px;
+    }
+    .buttons button:hover {
+      opacity: 0.92;
     }
 
-    button:hover {
-      opacity: 0.9;
-    }
-
-    .keyword-section {
-      text-align: left;
-      width: 100%;
-      max-width: 500px;
-      margin: 20px auto 0 auto;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .small-btn {
-      background: #eee;
-      border: 1px solid #ccc;
-      color: #333;
-      font-size: 14px;
-      padding: 8px 16px;
+    .preview-wrap {
+      margin-top: 18px;
+      padding: 10px 12px;
+      background: #f7f8ff;
       border-radius: 8px;
-      cursor: pointer;
-      transition: background 0.2s;
+      font-size: 13px;
+      color: #444;
+      border: 1px solid #dde2ff;
+    }
+    .preview-label {
+      font-weight: 600;
+      margin-bottom: 4px;
+      font-size: 12px;
+      color: #555;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+      font-size: 12px;
+      word-break: break-all;
     }
 
-    .small-btn:hover {
-      background: #ddd;
-    }
-
-    /* 📱 모바일(작은 화면) 전용 스타일 */
     @media (max-width: 600px) {
       body {
-        align-items: flex-start;
-        justify-content: center;
         padding-top: 80px;
-        height: auto;
-        min-height: 100vh;
       }
-
-      .help-link a {
-        font-size: 14px;
-        padding: 10px 18px;
-        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+      .card {
+        padding: 18px 14px 22px;
       }
-
-      .container {
-        padding: 10px 16px 30px;
+      .card-title {
+        font-size: 20px;
       }
-
-      h1 {
-        font-size: 22px;
-        margin-bottom: 16px;
+      .card-sub {
+        font-size: 12px;
       }
-
-      /* 검색창 + 버튼 세로 정렬 */
-      form {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
+      .row label {
         width: 100%;
-        max-width: 500px;
-        margin: 0 auto;
       }
-
-      input[type="text"] {
-        width: 100%;
-        font-size: 16px;
-      }
-
-      button {
-        width: 100%;
-        font-size: 15px;
-      }
-
-      .keyword-section {
-        max-width: 100%;
-        gap: 6px;
-        justify-content: flex-start;
-      }
-
-      /* 🔹 모바일에서 버튼을 한 줄에 4개 정도씩 나오게 */
-      .small-btn {
-        font-size: 11px;
-        padding: 6px 4px;
-        flex: 0 0 calc(25% - 6px); /* 4개 / 줄 기준 */
-        text-align: center;
+      .hint {
+        margin-left: 0;
       }
     }
   </style>
 </head>
 <body>
-
-  <!-- ✅ 좌측 상단 강조된 '사용법' 버튼 -->
+  <!-- 좌측 상단 '사용법' 페이지 링크 -->
   <div class="help-link">
     <a href="explain.html" target="_blank">사용법</a>
   </div>
 
-  <div class="container">
-    <h1>구글링하자</h1>
+  <div class="page-wrap">
+    <div class="card">
+      <h1 class="card-title">구글링하자</h1>
+      <p class="card-sub">
+        각 칸에 값을 넣으면 <strong>구글 검색문장</strong>을 자동으로 만들어 줍니다.<br>
+        연산자를 외울 필요 없이, 원하는 조건만 입력하고 <strong>“구글에서 검색하기”</strong>를 누르면 됩니다.
+      </p>
 
-    <!-- ✅ 검색 시 새창으로 열리게 설정 -->
-    <form action="https://www.google.com/search" method="GET" target="_blank">
-      <input type="text" id="searchInput" name="q" placeholder="검색어를 입력하세요" autofocus />
-      <button type="submit">검색</button>
-    </form>
+      <form id="advancedForm">
+        <!-- ✅ 1. 기본 검색어 / 문장 / 제외 / OR / AND / + / * -->
+        <div class="section-title">1. 기본 검색 설정</div>
 
-    <div class="keyword-section">
-      <!-- 기본 -->
-      <button class="small-btn" data-keyword="site:">site:</button>
-      <button class="small-btn" data-keyword="intitle:">intitle:</button>
-      <button class="small-btn" data-keyword="allintitle:">allintitle:</button>
-      <button class="small-btn" data-keyword="inurl:">inurl:</button>
-      <button class="small-btn" data-keyword="allinurl:">allinurl:</button>
-      <button class="small-btn" data-keyword="filetype:">filetype:</button>
-      <button class="small-btn" data-keyword="define:">define:</button>
-      <button class="small-btn" data-keyword="related:">related:</button>
-      <button class="small-btn" data-keyword="cache:">cache:</button>
-      <button class="small-btn" data-keyword="link:">link:</button>
+        <div class="row">
+          <label for="keyword">검색어</label>
+          <input type="text" id="keyword" placeholder="예: 중고 사기 고소 방법" />
+        </div>
 
-      <!-- 고급 검색 조합 -->
-      <button class="small-btn" data-keyword="OR">OR</button>
-      <button class="small-btn" data-keyword="AND">AND</button>
-      <button class="small-btn" data-keyword="*">*</button>
-      <button class="small-btn" data-keyword="..">..</button>
-      <button class="small-btn" data-keyword="-">-</button>
-      <button class="small-btn" data-keyword='"'>"</button>
-      <button class="small-btn" data-keyword="+">+</button>
-      <button class="small-btn" data-keyword="AROUND()">AROUND()</button>
+        <div class="row">
+          <label for="exact">정확한 문장 (" ")</label>
+          <input type="text" id="exact" placeholder='예: 중고 사기 예방 방법 (따옴표를 넣지마세요)' />
+        </div>
+        <div class="hint">따옴표 안 문장이 정확히 포함된 결과만 찾고 싶을 때</div>
 
-      <!-- 검색 범위 관련 -->
-      <button class="small-btn" data-keyword="before:">before:</button>
-      <button class="small-btn" data-keyword="after:">after:</button>
-      <button class="small-btn" data-keyword="source:">source:</button>
-      <button class="small-btn" data-keyword="location:">location:</button>
+        <div class="row">
+          <label for="orKeywords">OR 키워드 (OR)</label>
+          <input type="text" id="orKeywords" placeholder="예: 고양이,강아지" />
+        </div>
+        <div class="hint">쉼표(,)로 여러 개 입력 → (고양이 OR 강아지) 형태로 묶어서 검색</div>
 
-      <!-- 뉴스/쇼핑/기타 -->
-      <button class="small-btn" data-keyword="weather">weather</button>
-      <button class="small-btn" data-keyword="stocks">stocks</button>
-      <button class="small-btn" data-keyword="map">map</button>
-      <button class="small-btn" data-keyword="movie:">movie:</button>
-      <button class="small-btn" data-keyword="info:">info:</button>
+        <div class="row">
+          <label for="andKeywords">AND 키워드 (AND)</label>
+          <input type="text" id="andKeywords" placeholder="예: 경제,정책" />
+        </div>
+        <div class="hint">쉼표(,)로 여러 개 입력 → (경제 AND 정책) 형태로 묶어서 검색</div>
+
+        <div class="row">
+          <label for="plusKeywords">반드시 포함 (+)</label>
+          <input type="text" id="plusKeywords" placeholder="예: 공식,PDF" />
+        </div>
+        <div class="hint">쉼표(,)로 여러 개 입력 → +공식 +PDF 처럼 강제 포함</div>
+
+        <div class="row">
+          <label for="wildcard">와일드카드 패턴 (*)</label>
+          <input type="text" id="wildcard" placeholder="예: 서울 * 맛집" />
+        </div>
+        <div class="hint">* 위치에 어떤 단어든 들어가도 되게 검색 (예: 서울 &lt;아무말&gt; 맛집)</div>
+
+        <div class="row">
+          <label for="exclude">제외 단어 (-)</label>
+          <input type="text" id="exclude" placeholder="예: 블로그,카페,광고" />
+        </div>
+        <div class="hint">쉼표(,)로 여러 개 입력 → -블로그 -카페 -광고</div>
+
+        <!-- ✅ 2. 사이트 / 제목 / URL / 파일 형식 -->
+        <div class="section-title">2. 사이트 / 제목 / URL / 파일</div>
+
+        <div class="row">
+          <label for="site">사이트 (site:)</label>
+          <input type="text" id="site" placeholder="예: naver.com, law.go.kr" />
+        </div>
+
+        <div class="row">
+          <label for="intitle">제목에 포함 (intitle:)</label>
+          <input type="text" id="intitle" placeholder="예: 뉴스, 후기" />
+        </div>
+
+        <div class="row">
+          <label for="allintitle">제목 전체 (allintitle:)</label>
+          <input type="text" id="allintitle" placeholder="예: 서울 부동산" />
+        </div>
+
+        <div class="row">
+          <label for="inurl">URL에 포함 (inurl:)</label>
+          <input type="text" id="inurl" placeholder="예: board, notice" />
+        </div>
+
+        <div class="row">
+          <label for="allinurl">URL 다 포함 (allinurl:)</label>
+          <input type="text" id="allinurl" placeholder="예: shop product" />
+        </div>
+
+        <div class="row">
+          <label for="filetype">파일 형식 (filetype:)</label>
+          <input type="text" id="filetype" placeholder="예: pdf, doc, xls" />
+        </div>
+
+        <!-- ✅ 3. 날짜 / 출처 / 위치 / 범위 -->
+        <div class="section-title">3. 날짜 / 출처 / 위치 / 숫자 범위</div>
+
+        <div class="row">
+          <label for="after">이후 (after:)</label>
+          <input type="date" id="after" />
+        </div>
+        <div class="row">
+          <label for="before">이전 (before:)</label>
+          <input type="date" id="before" />
+        </div>
+
+        <div class="row">
+          <label for="source">뉴스 출처 (source:)</label>
+          <input type="text" id="source" placeholder="예: BBC, NYTimes" />
+        </div>
+
+        <div class="row">
+          <label for="location">위치 (location:)</label>
+          <input type="text" id="location" placeholder="예: seoul, korea" />
+        </div>
+
+        <div class="row">
+          <label for="rangeMin">숫자 범위(..)</label>
+          <input type="text" id="rangeMin" placeholder="최소값 예: 100" />
+        </div>
+        <div class="row">
+          <label for="rangeMax">숫자 범위 최대</label>
+          <input type="text" id="rangeMax" placeholder="최대값 예: 300" />
+        </div>
+        <div class="hint">예: camera $100..$300 처럼 쓸 때 숫자 범위를 넣어두고, 검색어에 함께 사용</div>
+
+        <!-- ✅ 4. 기타 연산자/기능 -->
+        <div class="section-title">4. 기타 연산자 / 기능</div>
+
+        <div class="row">
+          <label for="defineTerm">단어 정의 (define:)</label>
+          <input type="text" id="defineTerm" placeholder="예: 블록체인" />
+        </div>
+
+        <div class="row">
+          <label for="relatedSite">비슷한 사이트 (related:)</label>
+          <input type="text" id="relatedSite" placeholder="예: google.com" />
+        </div>
+
+        <div class="row">
+          <label for="cacheUrl">캐시 보기 (cache:)</label>
+          <input type="text" id="cacheUrl" placeholder="예: example.com" />
+        </div>
+
+        <div class="row">
+          <label for="linkUrl">링크된 페이지 (link:)</label>
+          <input type="text" id="linkUrl" placeholder="예: example.com" />
+        </div>
+
+        <div class="row">
+          <label for="aroundWord1">AROUND() 단어1</label>
+          <input type="text" id="aroundWord1" placeholder="예: python" />
+        </div>
+        <div class="row">
+          <label for="aroundWord2">AROUND() 단어2</label>
+          <input type="text" id="aroundWord2" placeholder="예: code" />
+        </div>
+        <div class="row">
+          <label for="aroundN">AROUND() 거리 n</label>
+          <input type="number" id="aroundN" placeholder="예: 3" />
+        </div>
+        <div class="hint">두 단어가 가까이 있는 결과 찾기: word1 AROUND(n) word2</div>
+
+        <!-- ✅ 5. 특수 검색 (날씨, 주식, 지도, 영화, 사이트 정보) -->
+        <div class="section-title">5. 특수 검색 (weather / stocks / map / movie / info)</div>
+
+        <div class="row">
+          <label for="weatherLoc">날씨 (weather)</label>
+          <input type="text" id="weatherLoc" placeholder="예: 서울" />
+        </div>
+
+        <div class="row">
+          <label for="stocksCode">주식 (stocks)</label>
+          <input type="text" id="stocksCode" placeholder="예: AAPL, TSLA" />
+        </div>
+
+        <div class="row">
+          <label for="mapKeyword">지도 (map)</label>
+          <input type="text" id="mapKeyword" placeholder="예: 카페, 맛집" />
+        </div>
+
+        <div class="row">
+          <label for="movieTitle">영화 (movie:)</label>
+          <input type="text" id="movieTitle" placeholder="예: 인셉션" />
+        </div>
+
+        <div class="row">
+          <label for="infoUrl">사이트 정보 (info:)</label>
+          <input type="text" id="infoUrl" placeholder="예: example.com" />
+        </div>
+
+        <!-- 버튼 & 미리보기 -->
+        <div class="buttons">
+          <button type="submit">구글에서 검색하기</button>
+          <button type="button" id="copyBtn">검색문장 복사하기</button>
+        </div>
+
+        <div class="preview-wrap">
+          <div class="preview-label">생성된 검색문장</div>
+          <code id="preview">아직 아무 것도 입력하지 않았습니다.</code>
+        </div>
+      </form>
     </div>
   </div>
 
   <script>
-    const input = document.getElementById("searchInput");
-    const buttons = document.querySelectorAll(".small-btn");
+    const form = document.getElementById("advancedForm");
+    const preview = document.getElementById("preview");
+    const copyBtn = document.getElementById("copyBtn");
 
-    buttons.forEach(btn => {
-      btn.addEventListener("click", () => {
-        const keyword = btn.dataset.keyword;
+    // 입력 요소들
+    const keywordInput   = document.getElementById("keyword");
+    const exactInput     = document.getElementById("exact");
+    const orInput        = document.getElementById("orKeywords");
+    const andInput       = document.getElementById("andKeywords");
+    const plusInput      = document.getElementById("plusKeywords");
+    const wildcardInput  = document.getElementById("wildcard");
+    const excludeInput   = document.getElementById("exclude");
 
-        if (input.value && !input.value.endsWith(" ")) {
-          input.value += " ";
+    const siteInput      = document.getElementById("site");
+    const intitleInput   = document.getElementById("intitle");
+    const allintitleInput= document.getElementById("allintitle");
+    const inurlInput     = document.getElementById("inurl");
+    const allinurlInput  = document.getElementById("allinurl");
+    const filetypeInput  = document.getElementById("filetype");
+
+    const afterInput     = document.getElementById("after");
+    const beforeInput    = document.getElementById("before");
+    const sourceInput    = document.getElementById("source");
+    const locationInput  = document.getElementById("location");
+    const rangeMinInput  = document.getElementById("rangeMin");
+    const rangeMaxInput  = document.getElementById("rangeMax");
+
+    const defineInput    = document.getElementById("defineTerm");
+    const relatedInput   = document.getElementById("relatedSite");
+    const cacheInput     = document.getElementById("cacheUrl");
+    const linkInput      = document.getElementById("linkUrl");
+    const aroundWord1    = document.getElementById("aroundWord1");
+    const aroundWord2    = document.getElementById("aroundWord2");
+    const aroundN        = document.getElementById("aroundN");
+
+    const weatherInput   = document.getElementById("weatherLoc");
+    const stocksInput    = document.getElementById("stocksCode");
+    const mapInput       = document.getElementById("mapKeyword");
+    const movieInput     = document.getElementById("movieTitle");
+    const infoInput      = document.getElementById("infoUrl");
+
+    function buildQuery() {
+      const parts = [];
+
+      const keyword = keywordInput.value.trim();
+      const exact   = exactInput.value.trim();
+      const orText  = orInput.value.trim();
+      const andText = andInput.value.trim();
+      const plusText= plusInput.value.trim();
+      const wildcard= wildcardInput.value.trim();
+      const exclude = excludeInput.value.trim();
+
+      const site      = siteInput.value.trim();
+      const intitle   = intitleInput.value.trim();
+      const allintitle= allintitleInput.value.trim();
+      const inurl     = inurlInput.value.trim();
+      const allinurl  = allinurlInput.value.trim();
+      const filetype  = filetypeInput.value.trim();
+
+      const after   = afterInput.value.trim();
+      const before  = beforeInput.value.trim();
+      const source  = sourceInput.value.trim();
+      const location= locationInput.value.trim();
+      const rangeMin= rangeMinInput.value.trim();
+      const rangeMax= rangeMaxInput.value.trim();
+
+      const defineTerm = defineInput.value.trim();
+      const relatedSite= relatedInput.value.trim();
+      const cacheUrl   = cacheInput.value.trim();
+      const linkUrl    = linkInput.value.trim();
+      const aw1        = aroundWord1.value.trim();
+      const aw2        = aroundWord2.value.trim();
+      const aN         = aroundN.value.trim();
+
+      const weatherLoc = weatherInput.value.trim();
+      const stocksCode = stocksInput.value.trim();
+      const mapKw      = mapInput.value.trim();
+      const movieTitle = movieInput.value.trim();
+      const infoUrl    = infoInput.value.trim();
+
+      // 1) 기본 검색어
+      if (keyword) parts.push(keyword);
+
+      // 2) 정확한 문장
+      if (exact) parts.push(`"${exact}"`);
+
+      // 3) OR 키워드 (쉼표 구분)
+      if (orText) {
+        const words = orText.split(",").map(w => w.trim()).filter(Boolean);
+        if (words.length === 1) {
+          parts.push(words[0]);
+        } else if (words.length > 1) {
+          parts.push("(" + words.join(" OR ") + ")");
         }
+      }
 
-        input.value += keyword;
-        input.focus();
+      // 4) AND 키워드 (쉼표 구분)
+      if (andText) {
+        const words = andText.split(",").map(w => w.trim()).filter(Boolean);
+        if (words.length === 1) {
+          parts.push(words[0]);
+        } else if (words.length > 1) {
+          parts.push("(" + words.join(" AND ") + ")");
+        }
+      }
+
+      // 5) 반드시 포함 (+)
+      if (plusText) {
+        const words = plusText.split(",").map(w => w.trim()).filter(Boolean);
+        words.forEach(w => parts.push(`+${w}`));
+      }
+
+      // 6) 와일드카드 패턴 (*)
+      if (wildcard) {
+        parts.push(wildcard);
+      }
+
+      // 7) 제외 단어 (-)
+      if (exclude) {
+        const words = exclude.split(",").map(w => w.trim()).filter(Boolean);
+        words.forEach(w => parts.push(`-${w}`));
+      }
+
+      // 8) 사이트 / 제목 / URL / 파일
+      if (site)       parts.push(`site:${site}`);
+      if (intitle)    parts.push(`intitle:${intitle}`);
+      if (allintitle) parts.push(`allintitle:${allintitle}`);
+      if (inurl)      parts.push(`inurl:${inurl}`);
+      if (allinurl)   parts.push(`allinurl:${allinurl}`);
+      if (filetype)   parts.push(`filetype:${filetype}`);
+
+      // 9) 날짜 / 출처 / 위치 / 범위
+      if (after)    parts.push(`after:${after}`);
+      if (before)   parts.push(`before:${before}`);
+      if (source)   parts.push(`source:${source}`);
+      if (location) parts.push(`location:${location}`);
+      if (rangeMin && rangeMax) {
+        parts.push(`${rangeMin}..${rangeMax}`);
+      }
+
+      // 10) 기타 연산자
+      if (defineTerm) parts.push(`define:${defineTerm}`);
+      if (relatedSite)parts.push(`related:${relatedSite}`);
+      if (cacheUrl)   parts.push(`cache:${cacheUrl}`);
+      if (linkUrl)    parts.push(`link:${linkUrl}`);
+
+      if (aw1 && aw2 && aN) {
+        parts.push(`${aw1} AROUND(${aN}) ${aw2}`);
+      }
+
+      // 11) 특수 검색
+      if (weatherLoc) parts.push(`weather ${weatherLoc}`);
+      if (stocksCode) parts.push(`stocks ${stocksCode}`);
+      if (mapKw)      parts.push(`${mapKw} map`);
+      if (movieTitle) parts.push(`movie:${movieTitle}`);
+      if (infoUrl)    parts.push(`info:${infoUrl}`);
+
+      if (parts.length === 0) return "";
+      return parts.join(" ");
+    }
+
+    function updatePreview() {
+      const q = buildQuery();
+      preview.textContent = q || "아직 아무 것도 입력하지 않았습니다.";
+    }
+
+    // 입력 변경 시마다 미리보기 업데이트
+    [
+      keywordInput, exactInput, orInput, andInput, plusInput, wildcardInput, excludeInput,
+      siteInput, intitleInput, allintitleInput, inurlInput, allinurlInput, filetypeInput,
+      afterInput, beforeInput, sourceInput, locationInput, rangeMinInput, rangeMaxInput,
+      defineInput, relatedInput, cacheInput, linkInput, aroundWord1, aroundWord2, aroundN,
+      weatherInput, stocksInput, mapInput, movieInput, infoInput
+    ].forEach(el => el.addEventListener("input", updatePreview));
+
+    // 폼 제출 → 구글 새 창 검색
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const q = buildQuery();
+      if (!q) {
+        alert("먼저 검색어 또는 조건을 하나 이상 입력해주세요.");
+        return;
+      }
+      const url = "https://www.google.com/search?q=" + encodeURIComponent(q);
+      window.open(url, "_blank");
+    });
+
+    // 검색문장 복사
+    copyBtn.addEventListener("click", () => {
+      const q = buildQuery();
+      if (!q) {
+        alert("복사할 검색문장이 없습니다.");
+        return;
+      }
+      navigator.clipboard.writeText(q).then(() => {
+        alert("검색문장을 복사했습니다:\n" + q);
+      }).catch(() => {
+        alert("복사에 실패했습니다. 직접 드래그해서 복사해주세요.");
       });
     });
+
+    // 초기 미리보기
+    updatePreview();
   </script>
 </body>
 </html>
