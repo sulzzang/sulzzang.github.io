@@ -2,42 +2,18 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <title>구글링하자 - 구글 검색 연산자 자동 생성기</title>
+  <title>구글링하자</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="google-site-verification" content="NHDO8YQr8qkzWdoeXodO_gR4GFP8OJkvCYkaon9m10g" />
-  <!-- ✅ 검색 결과 설명 (중요!) -->
-  <meta name="description" content="구글링하자는 구글 고급 검색 연산자를 자동으로 만들어 주는 무료 도구입니다. 검색어, 사이트, 날짜, 파일 형식 등을 입력하면 복잡한 구글 검색식(OR, AND, site:, filetype:, after:)을 한 번에 생성하고 바로 검색할 수 있습니다.">
-
-  <!-- (필수는 아니지만 넣어도 무방) -->
-  <meta name="keywords" content="구글링하자, 구글 검색, 구글링, 구글 고급 검색, 검색 연산자, 구글 검색 연산자, 구글 검색식, 구글 검색 방법">
-
-  <!-- ✅ 너 사이트 주소로 바꿔줘 -->
-  <link rel="canonical" href="https://sulzzang.github.io/" />
-
-  <!-- ✅ Open Graph (카톡/디엠 공유용 + 약간의 SEO 도움) -->
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="구글링하자 - 구글 고급 검색 연산자 자동 생성기">
-  <meta property="og:description" content="복잡한 구글 검색 연산자를 버튼 몇 번으로 완성! 구글링하자로 검색문장을 만들고 바로 구글에서 검색해 보세요.">
-  <meta property="og:url" content="https://sulzzang.github.io/">
-  <meta property="og:site_name" content="구글링하자">
-
-  <!-- 나중에 썸네일 이미지 만들면 여기에 경로 추가 -->
-  <!-- <meta property="og:image" content="https://example.com/img/googlinghaja-thumb.png"> -->
-
-  <!-- ✅ 애드센스 -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6490896369255241"
-    crossorigin="anonymous"></script>
+     crossorigin="anonymous"></script>
   <meta name="google-adsense-account" content="ca-pub-6490896369255241">
 
   <!-- ✅ 폰트 추가 (Noto Sans KR) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto Sans KR:wght@400;500;700&display=swap" rel="stylesheet">
 
   <style>
-    /* 여기부터는 너가 쓰던 스타일 그대로 둬도 되고,
-       아래 SEO용 섹션 스타일만 조금 추가하면 됨 */
-
     * { box-sizing: border-box; }
 
     body {
@@ -53,32 +29,185 @@
       position: relative;
     }
 
-    /* ... (기존 CSS 그대로) ... */
+    /* 좌측 상단 '사용법' 버튼 */
+    .help-link {
+      position: fixed;
+      top: 16px;
+      left: 16px;
+      z-index: 100;
+    }
+    .help-link a {
+      display: inline-block;
+      color: #000;
+      text-decoration: none;
+      background: #fff;
+      padding: 12px 22px;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+      transition: all 0.25s ease;
+      border: 1px solid #fff3;
+    }
+    .help-link a:hover {
+      background: #1a73e8;
+      color: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(26, 115, 232, 0.4);
+    }
 
-    /* ✅ 아래 SEO용 설명 섹션 스타일 하나만 추가 */
-    .seo-section {
-      margin-top: 24px;
-      padding: 18px 16px;
-      background: #f9fafc;
-      border-radius: 12px;
-      border: 1px solid #e3e6f0;
+    .page-wrap {
+      width: 100%;
+      max-width: 900px;
+      padding: 0 12px 40px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+      padding: 24px 20px 26px;
+      margin-bottom: 20px;
+    }
+
+    .card-title {
+      margin: 0 0 6px;
+      font-size: 24px;
+      text-align: center;
+    }
+
+    .card-sub {
+      margin: 0 0 18px;
       font-size: 13px;
-      line-height: 1.7;
+      color: #666;
+      text-align: center;
+    }
+
+    .section-title {
+      margin: 18px 0 6px;
+      font-size: 15px;
+      font-weight: 600;
       color: #333;
     }
-    .seo-section h2 {
-      margin-top: 0;
-      font-size: 18px;
-      margin-bottom: 8px;
+
+    .row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
     }
-    .seo-section h3 {
-      font-size: 15px;
-      margin-top: 14px;
+    .row label {
+      width: 160px;
+      font-size: 14px;
+      color: #444;
+    }
+    .row input {
+      flex: 1;
+      padding: 8px 10px;
+      font-size: 14px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      outline: none;
+      min-width: 0;
+    }
+    .row input:focus {
+      border-color: #4285f4;
+      box-shadow: 0 0 0 2px rgba(66,133,244,0.2);
+    }
+
+    .hint {
+      font-size: 11px;
+      color: #888;
+      margin-left: 160px;
+      margin-top: -6px;
       margin-bottom: 6px;
     }
-    .seo-section ul {
-      margin: 0;
-      padding-left: 18px;
+
+    .buttons {
+      margin-top: 16px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .buttons button {
+      padding: 9px 16px;
+      font-size: 14px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      background: #4285f4;
+      color: white;
+      min-width: 150px;
+    }
+    .buttons button:hover {
+      opacity: 0.92;
+    }
+
+    .preview-wrap {
+      margin-top: 18px;
+      padding: 10px 12px;
+      background: #f7f8ff;
+      border-radius: 8px;
+      font-size: 13px;
+      color: #444;
+      border: 1px solid #dde2ff;
+    }
+    .preview-label {
+      font-weight: 600;
+      margin-bottom: 4px;
+      font-size: 12px;
+      color: #555;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+      font-size: 12px;
+      word-break: break-all;
+    }
+
+    /* ✅ 쿠팡 파트너스 배너 컨테이너 */
+    .cp-wrap {
+      margin: 0 auto 24px;
+      max-width: 680px; /* PC에서 최대 680px, 그 이하에서는 100% */
+    }
+    .cp-desc {
+      font-size: 11px;
+      color: #ddd;
+      text-align: center;
+      margin: 0 0 8px;
+      line-height: 1.5;
+    }
+    .cp-widget-box {
+      background: #111;
+      border-radius: 12px;
+      border: 1px solid #333;
+      padding: 10px 8px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.7);
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding-top: 80px;
+      }
+      .card {
+        padding: 18px 14px 22px;
+      }
+      .card-title {
+        font-size: 20px;
+      }
+      .card-sub {
+        font-size: 12px;
+      }
+      .row label {
+        width: 100%;
+      }
+      .hint {
+        margin-left: 0;
+      }
+      .cp-widget-box {
+        padding: 8px 6px;
+      }
     }
   </style>
 </head>
