@@ -11,7 +11,7 @@
   <!-- ✅ 폰트 추가 (Noto Sans KR) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto Sans KR:wght@400;500;700&display=swap" rel="stylesheet">
 
   <style>
     * { box-sizing: border-box; }
@@ -19,7 +19,7 @@
     body {
       margin: 0;
       font-family: "Noto Sans KR", -apple-system, BlinkMacSystemFont, system-ui, "Segoe UI", sans-serif;
-      background: #000; /* 🔹 배경을 검은색으로 변경 */
+      background: #000;
       color: #222;
       display: flex;
       justify-content: center;
@@ -47,7 +47,7 @@
       font-weight: 600;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
       transition: all 0.25s ease;
-      border: 1px solid #fff3; /* 살짝 보이게 */
+      border: 1px solid #fff3;
     }
     .help-link a:hover {
       background: #1a73e8;
@@ -73,7 +73,7 @@
     .card-title {
       margin: 0 0 6px;
       font-size: 24px;
-      text-align: center; /* 🔹 h1 가운데 정렬 */
+      text-align: center;
     }
 
     .card-sub {
@@ -134,7 +134,7 @@
     .buttons button {
       padding: 9px 16px;
       font-size: 14px;
-      border-radius: 8px; /* 🔹 살짝 둥근 직사각형 */
+      border-radius: 8px;
       border: none;
       cursor: pointer;
       background: #4285f4;
@@ -166,6 +166,26 @@
       word-break: break-all;
     }
 
+    /* ✅ 쿠팡 파트너스 배너 컨테이너 */
+    .cp-wrap {
+      margin: 0 auto 24px;
+      max-width: 680px; /* PC에서 최대 680px, 그 이하에서는 100% */
+    }
+    .cp-desc {
+      font-size: 11px;
+      color: #ddd;
+      text-align: center;
+      margin: 0 0 8px;
+      line-height: 1.5;
+    }
+    .cp-widget-box {
+      background: #111;
+      border-radius: 12px;
+      border: 1px solid #333;
+      padding: 10px 8px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.7);
+    }
+
     @media (max-width: 600px) {
       body {
         padding-top: 80px;
@@ -184,6 +204,9 @@
       }
       .hint {
         margin-left: 0;
+      }
+      .cp-widget-box {
+        padding: 8px 6px;
       }
     }
   </style>
@@ -349,7 +372,7 @@
         </div>
         <div class="hint">두 단어가 가까이 있는 결과 찾기: word1 AROUND(n) word2</div>
 
-        <!-- ✅ 5. 특수 검색 (날씨, 주식, 지도, 영화, 사이트 정보) -->
+        <!-- ✅ 5. 특수 검색 (weather / stocks / map / movie / info) -->
         <div class="section-title">5. 특수 검색 (weather / stocks / map / movie / info)</div>
 
         <div class="row">
@@ -389,6 +412,29 @@
         </div>
       </form>
     </div>
+
+    <!-- ✅ 여기부터 쿠팡 파트너스 반응형 배너 -->
+    <div class="cp-wrap">
+      <p class="cp-desc">
+        이 페이지에는 쿠팡 파트너스 광고가 포함되어 있습니다.<br>
+        해당 링크를 통해 구매가 이루어질 경우, 사이트 운영자는 일정 수수료를 받을 수 있습니다.
+      </p>
+      <div class="cp-widget-box">
+        <script src="https://ads-partners.coupang.com/g.js"></script>
+        <script>
+          new PartnersCoupang.G({
+            "id": 946893,
+            "template": "carousel",
+            "trackingCode": "AF1050118",
+            "width": "100%",   // ✅ 부모(.cp-widget-box) 너비 기준으로 반응형
+            "height": "140",
+            "tsource": ""
+          });
+        </script>
+      </div>
+    </div>
+    <!-- ✅ 쿠팡 배너 끝 -->
+
   </div>
 
   <script>
@@ -472,50 +518,33 @@
       const movieTitle = movieInput.value.trim();
       const infoUrl    = infoInput.value.trim();
 
-      // 1) 기본 검색어
       if (keyword) parts.push(keyword);
-
-      // 2) 정확한 문장
       if (exact) parts.push(`"${exact}"`);
 
-      // 3) OR 키워드 (쉼표 구분)
       if (orText) {
         const words = orText.split(",").map(w => w.trim()).filter(Boolean);
-        if (words.length === 1) {
-          parts.push(words[0]);
-        } else if (words.length > 1) {
-          parts.push("(" + words.join(" OR ") + ")");
-        }
+        if (words.length === 1) parts.push(words[0]);
+        else if (words.length > 1) parts.push("(" + words.join(" OR ") + ")");
       }
 
-      // 4) AND 키워드 (쉼표 구분)
       if (andText) {
         const words = andText.split(",").map(w => w.trim()).filter(Boolean);
-        if (words.length === 1) {
-          parts.push(words[0]);
-        } else if (words.length > 1) {
-          parts.push("(" + words.join(" AND ") + ")");
-        }
+        if (words.length === 1) parts.push(words[0]);
+        else if (words.length > 1) parts.push("(" + words.join(" AND ") + ")");
       }
 
-      // 5) 반드시 포함 (+)
       if (plusText) {
         const words = plusText.split(",").map(w => w.trim()).filter(Boolean);
         words.forEach(w => parts.push(`+${w}`));
       }
 
-      // 6) 와일드카드 패턴 (*)
-      if (wildcard) {
-        parts.push(wildcard);
-      }
+      if (wildcard) parts.push(wildcard);
 
-      // 7) 제외 단어 (-)
       if (exclude) {
         const words = exclude.split(",").map(w => w.trim()).filter(Boolean);
         words.forEach(w => parts.push(`-${w}`));
       }
 
-      // 8) 사이트 / 제목 / URL / 파일
       if (site)       parts.push(`site:${site}`);
       if (intitle)    parts.push(`intitle:${intitle}`);
       if (allintitle) parts.push(`allintitle:${allintitle}`);
@@ -523,26 +552,19 @@
       if (allinurl)   parts.push(`allinurl:${allinurl}`);
       if (filetype)   parts.push(`filetype:${filetype}`);
 
-      // 9) 날짜 / 출처 / 위치 / 범위
       if (after)    parts.push(`after:${after}`);
       if (before)   parts.push(`before:${before}`);
       if (source)   parts.push(`source:${source}`);
       if (location) parts.push(`location:${location}`);
-      if (rangeMin && rangeMax) {
-        parts.push(`${rangeMin}..${rangeMax}`);
-      }
+      if (rangeMin && rangeMax) parts.push(`${rangeMin}..${rangeMax}`);
 
-      // 10) 기타 연산자
-      if (defineTerm) parts.push(`define:${defineTerm}`);
-      if (relatedSite)parts.push(`related:${relatedSite}`);
-      if (cacheUrl)   parts.push(`cache:${cacheUrl}`);
-      if (linkUrl)    parts.push(`link:${linkUrl}`);
+      if (defineTerm)  parts.push(`define:${defineTerm}`);
+      if (relatedSite) parts.push(`related:${relatedSite}`);
+      if (cacheUrl)    parts.push(`cache:${cacheUrl}`);
+      if (linkUrl)     parts.push(`link:${linkUrl}`);
 
-      if (aw1 && aw2 && aN) {
-        parts.push(`${aw1} AROUND(${aN}) ${aw2}`);
-      }
+      if (aw1 && aw2 && aN) parts.push(`${aw1} AROUND(${aN}) ${aw2}`);
 
-      // 11) 특수 검색
       if (weatherLoc) parts.push(`weather ${weatherLoc}`);
       if (stocksCode) parts.push(`stocks ${stocksCode}`);
       if (mapKw)      parts.push(`${mapKw} map`);
@@ -558,7 +580,6 @@
       preview.textContent = q || "아직 아무 것도 입력하지 않았습니다.";
     }
 
-    // 입력 변경 시마다 미리보기 업데이트
     [
       keywordInput, exactInput, orInput, andInput, plusInput, wildcardInput, excludeInput,
       siteInput, intitleInput, allintitleInput, inurlInput, allinurlInput, filetypeInput,
@@ -567,7 +588,6 @@
       weatherInput, stocksInput, mapInput, movieInput, infoInput
     ].forEach(el => el.addEventListener("input", updatePreview));
 
-    // 폼 제출 → 구글 새 창 검색
     form.addEventListener("submit", (e) => {
       e.preventDefault();
       const q = buildQuery();
@@ -579,7 +599,6 @@
       window.open(url, "_blank");
     });
 
-    // 검색문장 복사
     copyBtn.addEventListener("click", () => {
       const q = buildQuery();
       if (!q) {
@@ -593,7 +612,6 @@
       });
     });
 
-    // 초기 미리보기
     updatePreview();
   </script>
 </body>
