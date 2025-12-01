@@ -1,0 +1,17 @@
+# ✅ robots.txt for https://sulzzang.github.io/
+
+User-agent: *
+Allow: /
+
+# 🔍 사이트맵 위치 명시 (검색엔진이 자동으로 읽을 수 있게)
+Sitemap: https://sulzzang.github.io/sitemap.xml
+
+# 🧩 크롤러 접근 제한 예시 (필요하면 주석 해제해서 사용)
+# Disallow: /admin/
+# Disallow: /private/
+# Disallow: /temp/
+
+# 📝 참고: 
+# - Allow: /  → 전체 페이지 크롤링 허용
+# - Sitemap:  → 구글/빙/네이버 등에서 자동 수집
+# - 위 Disallow 섹션은 관리 페이지 있을 때만 쓰면 됨
