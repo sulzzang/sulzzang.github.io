@@ -2,8 +2,33 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <title>구글링하자</title>
+  <title>구글링도우미 - 구글 검색 연산자 자동 생성기</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ✅ 기본 SEO 메타 -->
+  <meta name="description" content="구글링도우미는 구글 고급 검색 연산자(site:, filetype:, intitle:, inurl: 등)를 입력만으로 쉽게 조합해, 복잡한 검색문장을 자동으로 만들어 주는 무료 도구입니다.">
+  <meta name="keywords" content="구글링도우미, 구글 검색 연산자, 고급 검색, site:, filetype:, intitle:, inurl:, 구글링 도우미, 검색문장 자동 생성기, 구글 검색 팁">
+
+  <!-- ✅ canonical (대표 URL) -->
+  <link rel="canonical" href="https://sulzzang.github.io/">
+
+  <!-- ✅ Open Graph (카카오톡/페북 등 공유용) -->
+  <meta property="og:title" content="구글링도우미 - 구글 검색 연산자 자동 생성기">
+  <meta property="og:description" content="site:, filetype:, intitle: 같은 구글 고급 검색 연산자를 외우지 않고, 입력만으로 검색문장을 자동 생성해주는 무료 구글링 도우미입니다.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sulzzang.github.io/">
+  <!-- ⚠️ 실제 준비한 OG 이미지 경로로 바꿔쓰기 -->
+  <meta property="og:image" content="https://sulzzang.github.io/og-google-helper.png">
+  <meta property="og:site_name" content="구글링도우미">
+
+  <!-- ✅ Twitter 카드 (트위터/X 공유용) -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="구글링도우미 - 구글 검색 연산자 자동 생성기">
+  <meta name="twitter:description" content="구글 고급 검색 연산자를 쉽게 조합해서, 한 번에 검색문장을 만들어 주는 무료 구글링 도우미입니다.">
+  <!-- ⚠️ 위 og:image와 동일하게 맞추는 걸 추천 -->
+  <meta name="twitter:image" content="https://sulzzang.github.io/og-google-helper.png">
+
+  <!-- ✅ 애드센스 -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6490896369255241"
      crossorigin="anonymous"></script>
   <meta name="google-adsense-account" content="ca-pub-6490896369255241">
@@ -11,7 +36,8 @@
   <!-- ✅ 폰트 추가 (Noto Sans KR) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto Sans KR:wght@400;500;700&display=swap" rel="stylesheet">
+  <!-- ⚠️ family 파라미터는 공백 대신 + 를 사용해야 함 -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 
   <style>
     * { box-sizing: border-box; }
@@ -169,7 +195,7 @@
     /* ✅ 쿠팡 파트너스 배너 컨테이너 */
     .cp-wrap {
       margin: 0 auto 24px;
-      max-width: 680px; /* PC에서 최대 680px, 그 이하에서는 100% */
+      max-width: 680px;
     }
     .cp-desc {
       font-size: 11px;
@@ -219,7 +245,7 @@
 
   <div class="page-wrap">
     <div class="card">
-      <h1 class="card-title">구글링하자</h1>
+      <h1 class="card-title">구글링도우미</h1>
       <p class="card-sub">
         각 칸에 값을 넣으면 <strong>구글 검색문장</strong>을 자동으로 만들어 줍니다.<br>
         연산자를 외울 필요 없이, 원하는 조건만 입력하고 <strong>“구글에서 검색하기”</strong>를 누르면 됩니다.
@@ -413,7 +439,7 @@
       </form>
     </div>
 
-    <!-- ✅ 여기부터 쿠팡 파트너스 반응형 배너 -->
+    <!-- ✅ 쿠팡 파트너스 반응형 배너 -->
     <div class="cp-wrap">
       <p class="cp-desc">
         이 페이지에는 쿠팡 파트너스 광고가 포함되어 있습니다.<br>
@@ -426,15 +452,13 @@
             "id": 946893,
             "template": "carousel",
             "trackingCode": "AF1050118",
-            "width": "100%",   // ✅ 부모(.cp-widget-box) 너비 기준으로 반응형
+            "width": "100%",
             "height": "140",
             "tsource": ""
           });
         </script>
       </div>
     </div>
-    <!-- ✅ 쿠팡 배너 끝 -->
-
   </div>
 
   <script>
@@ -442,7 +466,6 @@
     const preview = document.getElementById("preview");
     const copyBtn = document.getElementById("copyBtn");
 
-    // 입력 요소들
     const keywordInput   = document.getElementById("keyword");
     const exactInput     = document.getElementById("exact");
     const orInput        = document.getElementById("orKeywords");
